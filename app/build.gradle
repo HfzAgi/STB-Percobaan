@@ -1,0 +1,46 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'id.beranda.launcher'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'id.beranda.launcher'
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    // Kunci tetap supaya update APK bisa dipasang menimpa versi lama.
+    signingConfigs {
+        beranda {
+            storeFile file('beranda.keystore')
+            storePassword 'beranda123'
+            keyAlias 'beranda'
+            keyPassword 'beranda123'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.beranda
+        }
+        debug {
+            signingConfig signingConfigs.beranda
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
